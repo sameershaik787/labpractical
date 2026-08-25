@@ -66,3 +66,9 @@ export function updateTaskPriority(taskId, newPriority, existingTasks) {
         task.id === taskId ? { ...task, priority: newPriority } : task
     );
 }
+
+export function assignTask(taskId, newAssignee, existingTasks) {
+    return existingTasks.map(task => 
+        task.id === taskId ? { ...task, assignee: newAssignee || 'Unassigned' } : task
+    );
+}
