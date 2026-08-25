@@ -24,6 +24,13 @@ export function getProjects(projects, filters = {}) {
         );
     }
 
+    // Developer D: Team Member / Owner filter
+    if (filters.member && filters.member !== 'All') {
+        filteredProjects = filteredProjects.filter(p => 
+            p.owner && p.owner.toLowerCase() === filters.member.toLowerCase()
+        );
+    }
+
     // Developer D: Project sorting (A-Z, Z-A)
     if (filters.sortBy === 'A-Z' || filters.sortBy === 'name-asc') {
         filteredProjects.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
