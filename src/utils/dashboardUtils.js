@@ -1,14 +1,11 @@
-export function calculateStats(projects, tasks) {
+export function calculateStats(projects = [], tasks = []) {
     const stats = {
-        totalProjects: 0,
-        totalTasks: 0
+        totalProjects: projects.length,
+        totalTasks: tasks.length,
+        activeTasks: tasks.filter(t => (t.status || "").toLowerCase() === "active").length,
+        completedTasks: tasks.filter(t => (t.status || "").toLowerCase() === "completed").length,
+        highPriorityTasks: tasks.filter(t => (t.priority || "").toLowerCase() === "high").length
     };
-
-    // Calculate baseline stats
-    stats.totalTasks = tasks.length;
-    
-    // TODO: Calculate additional statistics here
-    // Developers will add totalProjects, activeTasks, completedTasks, highPriorityTasks
 
     return stats;
 }
