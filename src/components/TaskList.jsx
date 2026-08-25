@@ -7,6 +7,7 @@ function TaskList({ tasks, onCreateTask, onAssignTask, onCompleteTask, projects,
     const [newTaskAssignee, setNewTaskAssignee] = useState('');
     const [priorityFilter, setPriorityFilter] = useState('All');
     const [statusFilter, setStatusFilter] = useState('All');
+    const [assigneeFilter, setAssigneeFilter] = useState('All');
 
     const handlePriorityFilterChange = (priority) => {
         setPriorityFilter(priority);
@@ -19,6 +20,13 @@ function TaskList({ tasks, onCreateTask, onAssignTask, onCompleteTask, projects,
         setStatusFilter(status);
         if (onFilterChange) {
             onFilterChange({ ...currentFilters, status });
+        }
+    };
+
+    const handleAssigneeFilterChange = (assignee) => {
+        setAssigneeFilter(assignee);
+        if (onFilterChange) {
+            onFilterChange({ ...currentFilters, assignee });
         }
     };
 
@@ -62,6 +70,20 @@ function TaskList({ tasks, onCreateTask, onAssignTask, onCompleteTask, projects,
                         <option value="All">All</option>
                         <option value="Active">Active</option>
                         <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <label><strong>Assignee:</strong></label>
+                    <select 
+                        value={assigneeFilter} 
+                        onChange={(e) => handleAssigneeFilterChange(e.target.value)}
+                    >
+                        <option value="All">All Assignees</option>
+                        <option value="Unassigned">Unassigned</option>
+                        {users.map(u => (
+                            <option key={u.id} value={u.name}>{u.name}</option>
+                        ))}
                     </select>
                 </div>
             </div>
