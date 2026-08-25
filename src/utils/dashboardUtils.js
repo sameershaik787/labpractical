@@ -1,3 +1,4 @@
+export function calculateStats(projects = [], tasks = [], users = []) {
     // Developer B: Task Overview (Total, Active, Completed)
     const totalTasks = tasks.length;
     const activeTasks = tasks.filter(t => (t.status || "").toLowerCase() === "active").length;
@@ -17,6 +18,33 @@
     const assignedUserNames = new Set(tasks.map(t => t.assignee).filter(Boolean));
     const usersWithTasks = users.filter(u => assignedUserNames.has(u.name)).length;
 
+    // Developer D: Team Performance Statistics
+    const userWorkloadMap = {};
+    const userActiveTasksMap = {};
+    const userCompletedTasksMap = {};
+
+    tasks.forEach(t => {
+        const assignee = t.assignee || 'Unassigned';
+        if (assignee !== 'Unassigned') {
+            userWorkloadMap[assignee] = (userWorkloadMap[assignee] || 0) + 1;
+            if ((t.status || '').toLowerCase() === 'active') {
+                userActiveTasksMap[assignee] = (userActiveTasksMap[assignee] || 0) + 1;
+            }
+            if ((t.status || '').toLowerCase() === 'completed') {
+                userCompletedTasksMap[assignee] = (userCompletedTasksMap[assignee] || 0) + 1;
+            }
+        }
+    });
+
+    let highestWorkloadUser = 'None';
+    let maxWorkload = 0;
+    Object.entries(userWorkloadMap).forEach(([user, count]) => {
+        if (count > maxWorkload) {
+            maxWorkload = count;
+            highestWorkloadUser = `${user} (${count} tasks)`;
+        }
+    });
+
     return {
         totalProjects,
         activeProjects,
@@ -27,6 +55,9 @@
         highPriorityTasks,
         totalUsers,
         activeUsers,
-        usersWithTasks
+        usersWithTasks,
+        highestWorkloadUser,
+        userActiveTasksMap,
+        userCompletedTasksMap
     };
 }
