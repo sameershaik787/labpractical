@@ -97,3 +97,15 @@ export function completeTask(taskId, existingTasks, createNotificationCallback) 
 
     return updatedTasks;
 }
+
+export function verifyTaskIntegration(tasks) {
+    const priorities = ["Low", "Medium", "High"];
+    const statuses = ["Active", "Completed"];
+    
+    return {
+        total: tasks.length,
+        hasValidPriorities: tasks.every(t => priorities.includes(t.priority)),
+        hasValidStatuses: tasks.every(t => statuses.includes(t.status) || t.status === "Archived"),
+        allAssignedOrUnassigned: tasks.every(t => typeof t.assignee === 'string' || t.assignee === undefined)
+    };
+}
