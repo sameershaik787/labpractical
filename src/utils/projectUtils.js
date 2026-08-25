@@ -1,8 +1,37 @@
 export function getProjects(projects, filters = {}) {
     let filteredProjects = [...projects];
 
-    // TODO: Apply filters here based on the filters object
-    // Developers will add search, status filters, etc. in this section.
+    // Project search (Dev A)
+    if (filters.search) {
+        const query = filters.search.toLowerCase();
+        filteredProjects = filteredProjects.filter(p => 
+            (p.name && p.name.toLowerCase().includes(query)) ||
+            (p.category && p.category.toLowerCase().includes(query))
+        );
+    }
 
-    return filteredProjects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    // Project status filter (Dev B)
+    if (filters.status && filters.status !== 'All') {
+        filteredProjects = filteredProjects.filter(p => 
+            p.status && p.status.toLowerCase() === filters.status.toLowerCase()
+        );
+    }
+
+    // Project category filter (Dev B)
+    if (filters.category && filters.category !== 'All') {
+        filteredProjects = filteredProjects.filter(p => 
+            p.category && p.category.toLowerCase() === filters.category.toLowerCase()
+        );
+    }
+
+    // Project sorting (Dev D)
+    if (filters.sortBy === 'name-asc') {
+        filteredProjects.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (filters.sortBy === 'name-desc') {
+        filteredProjects.sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        filteredProjects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    return filteredProjects;
 }
