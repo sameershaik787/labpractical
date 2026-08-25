@@ -4,8 +4,31 @@ export function getTasks(tasks, filters = {}) {
         priority: task.priority || "Medium"
     }));
 
-    // TODO: Apply filters here based on the filters object
-    // Developers will add priority, search, status, and assignee filters here.
+    // Developer B: Filter by Priority (Low, Medium, High)
+    if (filters.priority && filters.priority !== "All") {
+        filteredTasks = filteredTasks.filter(
+            task => task.priority && task.priority.toLowerCase() === filters.priority.toLowerCase()
+        );
+    }
+
+    // Team integration: Support status, search, and assignee filters
+    if (filters.status && filters.status !== "All") {
+        filteredTasks = filteredTasks.filter(
+            task => task.status && task.status.toLowerCase() === filters.status.toLowerCase()
+        );
+    }
+    if (filters.search) {
+        const query = filters.search.toLowerCase();
+        filteredTasks = filteredTasks.filter(
+            task => (task.title && task.title.toLowerCase().includes(query)) ||
+                    (task.description && task.description.toLowerCase().includes(query))
+        );
+    }
+    if (filters.assignee) {
+        filteredTasks = filteredTasks.filter(
+            task => task.assignee === filters.assignee
+        );
+    }
 
     return filteredTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
