@@ -43,7 +43,19 @@ function Dashboard() {
                 <div className="dashboard-controls">
                     {/* Developers will add UI controls here: Project Search, Filters, Stats UI, Sorting UI */}
                     <div className="stat-card">
+                        <span>Total Projects: {stats.totalProjects}</span>
+                    </div>
+                    <div className="stat-card">
                         <span>Total Tasks: {stats.totalTasks}</span>
+                    </div>
+                    <div className="stat-card">
+                        <span>Active Tasks: {stats.activeTasks}</span>
+                    </div>
+                    <div className="stat-card">
+                        <span>Completed Tasks: {stats.completedTasks}</span>
+                    </div>
+                    <div className="stat-card">
+                        <span>High Priority: {stats.highPriorityTasks}</span>
                     </div>
                 </div>
             </header>
