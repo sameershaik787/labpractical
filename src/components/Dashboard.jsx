@@ -57,7 +57,14 @@ function Dashboard() {
 
                     <section className="dashboard-section">
                         <h2>Tasks</h2>
-                        <TaskList tasks={displayedTasks} onCreateTask={handleCreateTask} projects={projects} users={users} />
+                        <TaskList 
+                            tasks={displayedTasks} 
+                            onCreateTask={handleCreateTask} 
+                            projects={projects} 
+                            users={users}
+                            onFilterChange={setTaskFilters}
+                            currentFilters={taskFilters}
+                        />
                     </section>
 
                     <section className="dashboard-section">

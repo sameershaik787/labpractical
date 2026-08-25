@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 
-function TaskList({ tasks, onCreateTask, projects, users }) {
+function TaskList({ tasks, onCreateTask, projects, users, onFilterChange, currentFilters = {} }) {
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [newTaskProjectId, setNewTaskProjectId] = useState('');
     const [newTaskPriority, setNewTaskPriority] = useState('Medium');
+    const [priorityFilter, setPriorityFilter] = useState('All');
+
+    const handlePriorityFilterChange = (priority) => {
+        setPriorityFilter(priority);
+        if (onFilterChange) {
+            onFilterChange({ ...currentFilters, priority });
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,6 +28,19 @@ function TaskList({ tasks, onCreateTask, projects, users }) {
 
     return (
         <div className="task-section">
+            <div className="task-filter-bar card" style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <label><strong>Filter by Priority:</strong></label>
+                <select 
+                    value={priorityFilter} 
+                    onChange={(e) => handlePriorityFilterChange(e.target.value)}
+                >
+                    <option value="All">All Priorities</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
             <div className="task-creation-form card">
                 <h3>Create New Task</h3>
                 <form onSubmit={handleSubmit}>
