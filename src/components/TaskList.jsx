@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-function TaskList({ tasks, onCreateTask, projects, users, onFilterChange, currentFilters = {} }) {
+function TaskList({ tasks, onCreateTask, onAssignTask, projects, users, onFilterChange, currentFilters = {} }) {
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [newTaskProjectId, setNewTaskProjectId] = useState('');
     const [newTaskPriority, setNewTaskPriority] = useState('Medium');
+    const [newTaskAssignee, setNewTaskAssignee] = useState('');
     const [priorityFilter, setPriorityFilter] = useState('All');
 
     const handlePriorityFilterChange = (priority) => {
@@ -19,11 +20,13 @@ function TaskList({ tasks, onCreateTask, projects, users, onFilterChange, curren
             title: newTaskTitle,
             projectId: newTaskProjectId,
             priority: newTaskPriority,
+            assignee: newTaskAssignee || 'Unassigned',
             status: "Active"
         });
         setNewTaskTitle('');
         setNewTaskProjectId('');
         setNewTaskPriority('Medium');
+        setNewTaskAssignee('');
     };
 
     return (
@@ -68,6 +71,15 @@ function TaskList({ tasks, onCreateTask, projects, users, onFilterChange, curren
                         <option value="Medium">Medium Priority</option>
                         <option value="High">High Priority</option>
                     </select>
+                    <select
+                        value={newTaskAssignee}
+                        onChange={(e) => setNewTaskAssignee(e.target.value)}
+                    >
+                        <option value="">Assign User (Optional)</option>
+                        {users.map(u => (
+                            <option key={u.id} value={u.name}>{u.name}</option>
+                        ))}
+                    </select>
                     <button type="submit" className="btn-primary">Create Task</button>
                 </form>
             </div>
@@ -91,7 +103,23 @@ function TaskList({ tasks, onCreateTask, projects, users, onFilterChange, curren
                             </div>
                             <div className="card-body">
                                 <p><strong>Project:</strong> {projects.find(p => p.id === task.projectId)?.name || 'Unknown'}</p>
-                                <p><strong>Assignee:</strong> {task.assignee || 'Unassigned'}</p>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                    <strong>Assignee:</strong>
+                                    {onAssignTask ? (
+                                        <select
+                                            value={task.assignee || 'Unassigned'}
+                                            onChange={(e) => onAssignTask(task.id, e.target.value)}
+                                            style={{ padding: '0.2rem 0.5rem', fontSize: '0.85rem' }}
+                                        >
+                                            <option value="Unassigned">Unassigned</option>
+                                            {users.map(u => (
+                                                <option key={u.id} value={u.name}>{u.name}</option>
+                                            ))}
+                                        </select>
+                                    ) : (
+                                        <span>{task.assignee || 'Unassigned'}</span>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     ))}

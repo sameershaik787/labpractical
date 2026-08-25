@@ -5,7 +5,7 @@ import UserList from './UserList';
 import NotificationPanel from './NotificationPanel';
 import { projects as initialProjects, tasks as initialTasks, users as initialUsers, notifications as initialNotifications } from '../data/data';
 import { getProjects } from '../utils/projectUtils';
-import { getTasks, createTask } from '../utils/taskUtils';
+import { getTasks, createTask, assignTask } from '../utils/taskUtils';
 import { calculateStats } from '../utils/dashboardUtils';
 
 function Dashboard() {
@@ -32,6 +32,11 @@ function Dashboard() {
         } catch (error) {
             alert(error.message);
         }
+    };
+
+    const handleAssignTask = (taskId, newAssignee) => {
+        const updatedTasks = assignTask(taskId, newAssignee, tasks);
+        setTasks(updatedTasks);
     };
 
     return (
@@ -115,6 +120,7 @@ function Dashboard() {
                         <TaskList 
                             tasks={displayedTasks} 
                             onCreateTask={handleCreateTask} 
+                            onAssignTask={handleAssignTask}
                             projects={projects} 
                             users={users}
                             onFilterChange={setTaskFilters}
