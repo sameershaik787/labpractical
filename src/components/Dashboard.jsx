@@ -66,8 +66,8 @@ function Dashboard() {
                         <div className="stat-card">
                             <span>Completed Tasks: {stats.completedTasks}</span>
                         </div>
-                        <div className="stat-card">
-                            <span>High Priority: {stats.highPriorityTasks}</span>
+                        <div className="stat-card stat-card-high-priority">
+                            <span>High Priority Tasks: {stats.highPriorityTasks}</span>
                         </div>
                     </div>
 
