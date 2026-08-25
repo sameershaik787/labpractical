@@ -6,11 +6,19 @@ function TaskList({ tasks, onCreateTask, onAssignTask, onCompleteTask, projects,
     const [newTaskPriority, setNewTaskPriority] = useState('Medium');
     const [newTaskAssignee, setNewTaskAssignee] = useState('');
     const [priorityFilter, setPriorityFilter] = useState('All');
+    const [statusFilter, setStatusFilter] = useState('All');
 
     const handlePriorityFilterChange = (priority) => {
         setPriorityFilter(priority);
         if (onFilterChange) {
             onFilterChange({ ...currentFilters, priority });
+        }
+    };
+
+    const handleStatusFilterChange = (status) => {
+        setStatusFilter(status);
+        if (onFilterChange) {
+            onFilterChange({ ...currentFilters, status });
         }
     };
 
@@ -31,17 +39,31 @@ function TaskList({ tasks, onCreateTask, onAssignTask, onCompleteTask, projects,
 
     return (
         <div className="task-section">
-            <div className="task-filter-bar card" style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <label><strong>Filter by Priority:</strong></label>
-                <select 
-                    value={priorityFilter} 
-                    onChange={(e) => handlePriorityFilterChange(e.target.value)}
-                >
-                    <option value="All">All Priorities</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
+            <div className="task-filter-bar card" style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <label><strong>Priority:</strong></label>
+                    <select 
+                        value={priorityFilter} 
+                        onChange={(e) => handlePriorityFilterChange(e.target.value)}
+                    >
+                        <option value="All">All</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <label><strong>Status:</strong></label>
+                    <select 
+                        value={statusFilter} 
+                        onChange={(e) => handleStatusFilterChange(e.target.value)}
+                    >
+                        <option value="All">All</option>
+                        <option value="Active">Active</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
             </div>
 
             <div className="task-creation-form card">
