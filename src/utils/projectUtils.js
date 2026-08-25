@@ -24,11 +24,11 @@ export function getProjects(projects, filters = {}) {
         );
     }
 
-    // Project sorting (Dev D)
-    if (filters.sortBy === 'name-asc') {
-        filteredProjects.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (filters.sortBy === 'name-desc') {
-        filteredProjects.sort((a, b) => b.name.localeCompare(a.name));
+    // Developer D: Project sorting (A-Z, Z-A)
+    if (filters.sortBy === 'A-Z' || filters.sortBy === 'name-asc') {
+        filteredProjects.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    } else if (filters.sortBy === 'Z-A' || filters.sortBy === 'name-desc') {
+        filteredProjects.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
     } else {
         filteredProjects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
