@@ -61,3 +61,15 @@ export function calculateStats(projects = [], tasks = [], users = []) {
         userCompletedTasksMap
     };
 }
+
+export function verifyDashboardIntegration(stats) {
+    return (
+        typeof stats.totalProjects === 'number' &&
+        typeof stats.totalTasks === 'number' &&
+        typeof stats.activeTasks === 'number' &&
+        typeof stats.completedTasks === 'number' &&
+        typeof stats.highPriorityTasks === 'number' &&
+        typeof stats.totalUsers === 'number' &&
+        typeof stats.highestWorkloadUser === 'string'
+    );
+}
