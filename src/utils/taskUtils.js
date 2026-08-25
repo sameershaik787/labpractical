@@ -72,3 +72,28 @@ export function assignTask(taskId, newAssignee, existingTasks) {
         task.id === taskId ? { ...task, assignee: newAssignee || 'Unassigned' } : task
     );
 }
+
+export function completeTask(taskId, existingTasks, createNotificationCallback) {
+    let completedTask = null;
+
+    const updatedTasks = existingTasks.map(task => {
+        if (task.id === taskId) {
+            completedTask = { ...task, status: "Completed" };
+            return completedTask;
+        }
+        return task;
+    });
+
+    if (completedTask && createNotificationCallback) {
+        const assignee = completedTask.assignee || 'Unassigned';
+        createNotificationCallback({
+            id: `N-${Date.now()}`,
+            message: `${assignee} completed the ${completedTask.title} task.`,
+            type: "success",
+            read: false,
+            createdAt: new Date().toISOString()
+        });
+    }
+
+    return updatedTasks;
+}
