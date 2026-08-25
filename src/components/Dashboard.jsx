@@ -21,7 +21,7 @@ function Dashboard() {
     // Processed Data
     const displayedProjects = getProjects(projects, projectFilters);
     const displayedTasks = getTasks(tasks, taskFilters);
-    const stats = calculateStats(displayedProjects, displayedTasks);
+    const stats = calculateStats(displayedProjects, displayedTasks, users);
 
     const handleCreateTask = (taskData) => {
         try {
