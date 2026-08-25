@@ -40,22 +40,65 @@ function Dashboard() {
                 <h1>Project Management Dashboard</h1>
                 
                 {/* CONFLICT ZONE 5: DASHBOARD CONTROLS */}
-                <div className="dashboard-controls">
-                    {/* Developers will add UI controls here: Project Search, Filters, Stats UI, Sorting UI */}
-                    <div className="stat-card">
-                        <span>Total Projects: {stats.totalProjects}</span>
+                <div className="dashboard-controls" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div className="stats-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                        <div className="stat-card">
+                            <span>Total Projects: {stats.totalProjects}</span>
+                        </div>
+                        <div className="stat-card">
+                            <span>Total Tasks: {stats.totalTasks}</span>
+                        </div>
+                        <div className="stat-card">
+                            <span>Active Tasks: {stats.activeTasks}</span>
+                        </div>
+                        <div className="stat-card">
+                            <span>Completed Tasks: {stats.completedTasks}</span>
+                        </div>
+                        <div className="stat-card">
+                            <span>High Priority: {stats.highPriorityTasks}</span>
+                        </div>
                     </div>
-                    <div className="stat-card">
-                        <span>Total Tasks: {stats.totalTasks}</span>
-                    </div>
-                    <div className="stat-card">
-                        <span>Active Tasks: {stats.activeTasks}</span>
-                    </div>
-                    <div className="stat-card">
-                        <span>Completed Tasks: {stats.completedTasks}</span>
-                    </div>
-                    <div className="stat-card">
-                        <span>High Priority: {stats.highPriorityTasks}</span>
+
+                    <div className="controls-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                        {/* Search UI (Dev A) */}
+                        <input
+                            type="text"
+                            placeholder="Search projects..."
+                            value={projectFilters.search || ''}
+                            onChange={(e) => setProjectFilters(prev => ({ ...prev, search: e.target.value }))}
+                        />
+
+                        {/* Project Status Filter UI (Dev B) */}
+                        <select
+                            value={projectFilters.status || 'All'}
+                            onChange={(e) => setProjectFilters(prev => ({ ...prev, status: e.target.value }))}
+                        >
+                            <option value="All">All Project Statuses</option>
+                            <option value="Active">Active</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Archived">Archived</option>
+                        </select>
+
+                        {/* Project Category Filter UI (Dev B) */}
+                        <select
+                            value={projectFilters.category || 'All'}
+                            onChange={(e) => setProjectFilters(prev => ({ ...prev, category: e.target.value }))}
+                        >
+                            <option value="All">All Categories</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Operations">Operations</option>
+                        </select>
+
+                        {/* Sorting UI (Dev D) */}
+                        <select
+                            value={projectFilters.sortBy || ''}
+                            onChange={(e) => setProjectFilters(prev => ({ ...prev, sortBy: e.target.value }))}
+                        >
+                            <option value="">Sort By</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                        </select>
                     </div>
                 </div>
             </header>
