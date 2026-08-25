@@ -24,9 +24,10 @@ export function getTasks(tasks, filters = {}) {
                     (task.description && task.description.toLowerCase().includes(query))
         );
     }
-    if (filters.assignee) {
+    // Developer D: Filter by Assigned User
+    if (filters.assignee && filters.assignee !== "All") {
         filteredTasks = filteredTasks.filter(
-            task => task.assignee === filters.assignee
+            task => task.assignee && task.assignee.toLowerCase() === filters.assignee.toLowerCase()
         );
     }
 
