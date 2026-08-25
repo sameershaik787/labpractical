@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function TaskList({ tasks, onCreateTask, onAssignTask, projects, users, onFilterChange, currentFilters = {} }) {
+function TaskList({ tasks, onCreateTask, onAssignTask, onCompleteTask, projects, users, onFilterChange, currentFilters = {} }) {
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [newTaskProjectId, setNewTaskProjectId] = useState('');
     const [newTaskPriority, setNewTaskPriority] = useState('Medium');
@@ -120,6 +120,17 @@ function TaskList({ tasks, onCreateTask, onAssignTask, projects, users, onFilter
                                         <span>{task.assignee || 'Unassigned'}</span>
                                     )}
                                 </div>
+                                {task.status !== 'Completed' && onCompleteTask && (
+                                    <div style={{ marginTop: '0.75rem' }}>
+                                        <button 
+                                            className="btn-primary" 
+                                            style={{ fontSize: '0.8rem', padding: '0.25rem 0.5rem' }}
+                                            onClick={() => onCompleteTask(task.id)}
+                                        >
+                                            Mark as Complete
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}
