@@ -111,6 +111,17 @@ function Dashboard() {
                             <option value="A-Z">Project Name (A-Z)</option>
                             <option value="Z-A">Project Name (Z-A)</option>
                         </select>
+
+                        {/* Reset Dashboard Controls (Dev D) */}
+                        {(projectFilters.search || projectFilters.status !== 'All' || projectFilters.category !== 'All' || projectFilters.sortBy) && (
+                            <button
+                                className="btn-secondary"
+                                style={{ padding: '0.5rem 0.75rem', fontSize: '0.85rem', cursor: 'pointer' }}
+                                onClick={() => setProjectFilters({})}
+                            >
+                                Reset Controls
+                            </button>
+                        )}
                     </div>
                 </div>
             </header>
