@@ -11,7 +11,7 @@ export function getTasks(tasks, filters = {}) {
         );
     }
 
-    // Team integration: Support status, search, and assignee filters
+    // Developer D: Filter by Task Status (All, Active, Completed)
     if (filters.status && filters.status !== "All") {
         filteredTasks = filteredTasks.filter(
             task => task.status && task.status.toLowerCase() === filters.status.toLowerCase()
