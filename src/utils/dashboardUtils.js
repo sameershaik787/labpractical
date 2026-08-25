@@ -1,8 +1,9 @@
-export function calculateStats(projects = [], tasks = [], users = []) {
-    // Developer B: Task Overview (Total, Active, Completed, High Priority)
+    // Developer B: Task Overview (Total, Active, Completed)
     const totalTasks = tasks.length;
     const activeTasks = tasks.filter(t => (t.status || "").toLowerCase() === "active").length;
     const completedTasks = tasks.filter(t => (t.status || "").toLowerCase() === "completed").length;
+
+    // Developer D: High-Priority Tasks Count
     const highPriorityTasks = tasks.filter(t => (t.priority || "").toLowerCase() === "high").length;
 
     // Developer A: Project Overview
