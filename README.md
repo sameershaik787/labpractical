@@ -24,6 +24,19 @@ A simple, static Project Management Dashboard built with React and Vite. This pr
 - **Round 9**: Connected Dashboard Task Overview (Total, Active, Completed tasks).
 - **Round 10**: Final Integration and validation.
 
+## Developer D Completed Rounds Summary
+
+- **Round 1**: Task Status Filter (`All`, `Active`, `Completed`) in `getTasks()` and UI.
+- **Round 2**: Task Assignee Filter (filter tasks by selected team member).
+- **Round 3**: High-Priority Task Statistic in `calculateStats()` and dashboard badge.
+- **Round 4**: Project Sorting UI (`A-Z` and `Z-A`) in dashboard controls.
+- **Round 5**: Rebase & dashboard integration with Reset Controls.
+- **Round 6**: Final dashboard verification across all controls.
+- **Round 7**: Team Member Filter (filter projects and tasks simultaneously).
+- **Round 8**: Dashboard Notifications unread count badge & mark-as-read workflow.
+- **Round 9**: Team Performance Statistics & Highest Workload User in `calculateStats()`.
+- **Round 10**: Full Dashboard Integration Challenge validation.
+
 ## Tech Stack
 
 - React
