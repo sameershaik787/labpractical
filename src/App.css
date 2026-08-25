@@ -1,1 +1,19 @@
-/* App specific overrides if any, otherwise keep empty to use index.css */
+/* Task Priority and Filter styles for Developer B */
+.badge.priority-high {
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3);
+}
+
+.badge.priority-medium {
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3);
+}
+
+.badge.priority-low {
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+.task-filter-bar {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
