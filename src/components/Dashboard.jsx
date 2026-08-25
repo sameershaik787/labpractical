@@ -75,6 +75,9 @@ function Dashboard() {
                         <div className="stat-card stat-card-high-priority">
                             <span>High Priority Tasks: {stats.highPriorityTasks}</span>
                         </div>
+                        <div className="stat-card">
+                            <span>Top Workload: {stats.highestWorkloadUser}</span>
+                        </div>
                     </div>
 
                     <div className="controls-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
