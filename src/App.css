@@ -17,3 +17,21 @@
   padding: 0.75rem 1rem;
   border-radius: 8px;
 }
+
+/* Developer D Dashboard Styles */
+.stat-card-high-priority {
+  border-left: 4px solid var(--priority-high-bg, #ef4444);
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-color, #1e293b);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
