@@ -107,9 +107,9 @@ function Dashboard() {
                             value={projectFilters.sortBy || ''}
                             onChange={(e) => setProjectFilters(prev => ({ ...prev, sortBy: e.target.value }))}
                         >
-                            <option value="">Sort By</option>
-                            <option value="name-asc">Name (A-Z)</option>
-                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="">Sort Projects: Default</option>
+                            <option value="A-Z">Project Name (A-Z)</option>
+                            <option value="Z-A">Project Name (Z-A)</option>
                         </select>
                     </div>
                 </div>
