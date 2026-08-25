@@ -112,12 +112,30 @@ function Dashboard() {
                             <option value="Z-A">Project Name (Z-A)</option>
                         </select>
 
+                        {/* Team Member Filter UI (Dev D) */}
+                        <select
+                            value={projectFilters.member || 'All'}
+                            onChange={(e) => {
+                                const selectedUser = e.target.value;
+                                setProjectFilters(prev => ({ ...prev, member: selectedUser }));
+                                setTaskFilters(prev => ({ ...prev, assignee: selectedUser }));
+                            }}
+                        >
+                            <option value="All">All Team Members</option>
+                            {users.map(u => (
+                                <option key={u.id} value={u.name}>{u.name}</option>
+                            ))}
+                        </select>
+
                         {/* Reset Dashboard Controls (Dev D) */}
-                        {(projectFilters.search || projectFilters.status !== 'All' || projectFilters.category !== 'All' || projectFilters.sortBy) && (
+                        {(projectFilters.search || (projectFilters.status && projectFilters.status !== 'All') || (projectFilters.category && projectFilters.category !== 'All') || (projectFilters.member && projectFilters.member !== 'All') || projectFilters.sortBy) && (
                             <button
                                 className="btn-secondary"
                                 style={{ padding: '0.5rem 0.75rem', fontSize: '0.85rem', cursor: 'pointer' }}
-                                onClick={() => setProjectFilters({})}
+                                onClick={() => {
+                                    setProjectFilters({});
+                                    setTaskFilters({});
+                                }}
                             >
                                 Reset Controls
                             </button>
