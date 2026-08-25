@@ -46,6 +46,12 @@ function Dashboard() {
         setTasks(updatedTasks);
     };
 
+    const handleMarkAsRead = (notificationId) => {
+        setNotifications(prev => prev.map(n => 
+            n.id === notificationId ? { ...n, read: true } : n
+        ));
+    };
+
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
@@ -172,7 +178,7 @@ function Dashboard() {
                 </main>
 
                 <aside className="sidebar">
-                    <NotificationPanel notifications={notifications} />
+                    <NotificationPanel notifications={notifications} onMarkAsRead={handleMarkAsRead} />
                 </aside>
             </div>
         </div>
