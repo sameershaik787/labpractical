@@ -55,3 +55,14 @@ export function createTask(taskData, existingTasks) {
 
     return [...existingTasks, newTask];
 }
+
+export function updateTaskPriority(taskId, newPriority, existingTasks) {
+    const validPriorities = ["Low", "Medium", "High"];
+    if (!validPriorities.includes(newPriority)) {
+        throw new Error(`Invalid priority: ${newPriority}. Must be Low, Medium, or High`);
+    }
+
+    return existingTasks.map(task => 
+        task.id === taskId ? { ...task, priority: newPriority } : task
+    );
+}
